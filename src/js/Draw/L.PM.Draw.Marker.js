@@ -157,11 +157,9 @@ Draw.Marker = Draw.extend({
     if(marker.pm && this.options.markerEditable) {
       // enable editing for the marker
       marker.pm.enable();
-    }else{
-      if(marker.dragging) {
+    }else if(marker.dragging) {
         marker.dragging.disable();
       }
-    }
 
     // fire the pm:create event and pass shape and marker
     Utils._fireEvent(this._map,'pm:create', {

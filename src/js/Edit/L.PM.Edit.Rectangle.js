@@ -2,7 +2,7 @@
 // https://github.com/Leaflet/Leaflet.draw/blob/master/src/edit/handler/Edit.Rectangle.js
 
 import Edit from './L.PM.Edit';
-import Utils from "../L.PM.Utils";
+import Utils from '../L.PM.Utils';
 
 Edit.Rectangle = Edit.Polygon.extend({
   _shape: 'Rectangle',
@@ -45,7 +45,7 @@ Edit.Rectangle = Edit.Polygon.extend({
       draggable: true,
       icon: L.divIcon({ className: 'marker-icon' }),
     });
-    this._setPane(marker,'vertexPane');
+    this._setPane(marker, 'vertexPane');
 
     marker._origLatLng = latlng;
     marker._index = index;
@@ -56,8 +56,8 @@ Edit.Rectangle = Edit.Polygon.extend({
     return marker;
   },
   // Add marker events after adding the snapping events to the markers, beacause of the execution order
-  _addMarkerEvents(){
-    this._markers[0].forEach((marker)=>{
+  _addMarkerEvents() {
+    this._markers[0].forEach((marker) => {
       marker.on('dragstart', this._onMarkerDragStart, this);
       marker.on('drag', this._onMarkerDrag, this);
       marker.on('dragend', this._onMarkerDragEnd, this);
@@ -87,11 +87,11 @@ Edit.Rectangle = Edit.Polygon.extend({
     // (Without this, it's occasionally possible for a marker to get stuck as 'snapped,' which prevents Rectangle resizing)
     draggedMarker._snapped = false;
 
-    Utils._fireEvent(this._layer,'pm:markerdragstart', {
+    Utils._fireEvent(this._layer, 'pm:markerdragstart', {
       layer: this._layer,
       markerEvent: e,
       shape: this.getShape(),
-      indexPath: undefined
+      indexPath: undefined,
     });
   },
 
@@ -109,11 +109,11 @@ Edit.Rectangle = Edit.Polygon.extend({
       this._adjustRectangleForMarkerMove(draggedMarker);
     }
 
-    Utils._fireEvent(this._layer,'pm:markerdrag', {
+    Utils._fireEvent(this._layer, 'pm:markerdrag', {
       layer: this._layer,
       markerEvent: e,
       shape: this.getShape(),
-      indexPath: undefined
+      indexPath: undefined,
     });
   },
 
@@ -131,11 +131,11 @@ Edit.Rectangle = Edit.Polygon.extend({
     // Update bounding box
     this._layer.setLatLngs(corners);
 
-    Utils._fireEvent(this._layer,'pm:markerdragend', {
+    Utils._fireEvent(this._layer, 'pm:markerdragend', {
       layer: this._layer,
       markerEvent: e,
       shape: this.getShape(),
-      indexPath: undefined
+      indexPath: undefined,
     });
 
     // fire edit event
@@ -151,7 +151,7 @@ Edit.Rectangle = Edit.Polygon.extend({
     // update rectangle boundaries, based on moved marker's new LatLng and cached opposite corner's LatLng
     const movedLatLng = movedMarker.getLatLng();
     this._layer.setBounds(
-      L.latLngBounds(movedLatLng, movedMarker._oppositeCornerLatLng)
+      L.latLngBounds(movedLatLng, movedMarker._oppositeCornerLatLng),
     );
 
     // Reposition the markers at each corner
@@ -178,7 +178,7 @@ Edit.Rectangle = Edit.Polygon.extend({
     if (!markerLatLngs.length || markerLatLngs.length !== 4) {
       /* eslint-disable-next-line no-console */
       console.error(
-        '_adjustAllMarkers() requires an array of EXACTLY 4 LatLng coordinates'
+        '_adjustAllMarkers() requires an array of EXACTLY 4 LatLng coordinates',
       );
       return;
     }

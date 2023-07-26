@@ -167,9 +167,9 @@ export function prioritiseSort(key, _sortingOrder, order = 'asc') {
       return "Polygon";
     }else if(layer instanceof L.Polyline){
       return "Line";
-    }else{
-      return undefined;
     }
+      return undefined;
+    
   }
 
   return (a, b) => {

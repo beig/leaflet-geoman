@@ -91,12 +91,12 @@ const Utils = {
         groupIds,
         groups
       }
-    }else{
+    }
      return {
        groups: layer._pmLastGroupFetch.groups,
        groupIds: layer._pmLastGroupFetch.groupIds
      }
-    }
+    
   },
   createGeodesicPolygon,
   getTranslation,
