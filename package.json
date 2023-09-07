@@ -59,6 +59,7 @@
     "test": "./node_modules/.bin/cypress run",
     "cypress": "./node_modules/.bin/cypress open",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && npx webpack --config=webpack.build.js",
+    "build-dev": "set NODE_OPTIONS=--openssl-legacy-provider && npx webpack --config=webpack.dev.js",
     "prepare": "npm run build",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "eslint": "eslint src/ --fix",

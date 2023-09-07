@@ -150,7 +150,7 @@ Draw.Circle = Draw.extend({
 
     let distance;
 
-    if (this._map.options.crs === L.CRS.Simple) {
+    if (this._map.options.crs === L.CRS.Simple || this._map.options.crs.simple) {
       distance = this._map.distance(A, B);
     } else {
       distance = A.distanceTo(B);
