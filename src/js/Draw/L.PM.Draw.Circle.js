@@ -230,7 +230,7 @@ Draw.Circle = Draw.extend({
 
     let radius;
 
-    if (this._map.options.crs === L.CRS.Simple) {
+    if (this._map.options.crs === L.CRS.Simple || this._map.options.crs.simple) {
       radius = this._map.distance(center, latlng);
     } else {
       radius = center.distanceTo(latlng);
