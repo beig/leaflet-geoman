@@ -192,7 +192,7 @@ Edit.Circle = Edit.extend({
     const A = this._centerMarker.getLatLng();
     const B = this._outerMarker.getLatLng();
 
-    const distance = A.distanceTo(B);
+    const distance = this._calcDistance(A, B);
 
     if(this.options.minRadiusCircle && distance < this.options.minRadiusCircle) {
       this._layer.setRadius(this.options.minRadiusCircle);
@@ -283,7 +283,7 @@ Edit.Circle = Edit.extend({
   _getNewDestinationOfOuterMarker(){
     const latlng = this._centerMarker.getLatLng();
     let secondLatLng = this._outerMarker.getLatLng();
-    const distance = latlng.distanceTo(secondLatLng);
+    const distance = this._calcDistance(latlng, secondLatLng);
     if(this.options.minRadiusCircle && distance < this.options.minRadiusCircle) {
       secondLatLng = destinationOnLine(this._map,latlng,secondLatLng,this.options.minRadiusCircle);
     }else if(this.options.maxRadiusCircle && distance > this.options.maxRadiusCircle) {
@@ -295,7 +295,7 @@ Edit.Circle = Edit.extend({
     if(this._outerMarker._snapped) {
       const latlng = this._centerMarker.getLatLng();
       const secondLatLng = this._outerMarker.getLatLng();
-      const distance = latlng.distanceTo(secondLatLng);
+      const distance = this._calcDistance(latlng, secondLatLng);
       if(this.options.minRadiusCircle && distance < this.options.minRadiusCircle) {
         this._outerMarker.setLatLng(this._outerMarker._orgLatLng);
       } else if(this.options.maxRadiusCircle && distance > this.options.maxRadiusCircle) {
@@ -304,5 +304,12 @@ Edit.Circle = Edit.extend({
     }
     // calculate the new latlng of marker if radius is out of min/max
     this._outerMarker.setLatLng(this._getNewDestinationOfOuterMarker());
+  },
+  _calcDistance(pointA, pointB) {
+    if (this._map.options.crs === L.CRS.Simple || this._map.options.crs.simple) {
+      return this._map.distance(pointA, pointB);
+    } else {
+      return pointA.distanceTo(pointB);
+    }
   }
 });
