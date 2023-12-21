@@ -126,9 +126,9 @@ Edit.Circle = Edit.extend({
     this._helperLayers.addLayer(this._hintline);
   },
   _createCenterMarker(latlng) {
-    const marker = this._createMarker(latlng);
+    const marker = this._createMarker(latlng, false);
 
-    L.DomUtil.addClass(marker._icon, 'leaflet-pm-draggable');
+    // L.DomUtil.addClass(marker._icon, 'leaflet-pm-draggable');
     // TODO: switch back to move event once this leaflet issue is solved:
     // https://github.com/Leaflet/Leaflet/issues/6492
     marker.on('drag', this._moveCircle, this);
@@ -141,15 +141,15 @@ Edit.Circle = Edit.extend({
     return marker;
   },
   _createOuterMarker(latlng) {
-    const marker = this._createMarker(latlng);
+    const marker = this._createMarker(latlng, true);
 
     marker.on('drag', this._resizeCircle, this);
 
     return marker;
   },
-  _createMarker(latlng) {
+  _createMarker(latlng, draggable) {
     const marker = new L.Marker(latlng, {
-      draggable: true,
+      draggable: draggable,
       icon: L.divIcon({ className: 'marker-icon' }),
     });
     this._setPane(marker,'vertexPane');
